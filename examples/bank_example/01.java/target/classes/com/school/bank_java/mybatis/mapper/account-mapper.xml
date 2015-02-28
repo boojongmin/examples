@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.bank_java.mybatis.mapper">
+  <!-- <select id="selectAccount_numbers" parameterType="int" resultType="string">
+    select accountNumber
+		from account
+		where userUid = #{userUid}
+		group by accountNumber
+  </select> -->
+  <select id="selectAccountList" parameterType="int" resultType="AccountVo">
+    select * from account where userUid = #{userUid}
+  </select> 
+  <select id="selectAccountVoByUid" parameterType="int" resultType="AccountVo">
+    select * from account where uid = #{uid}
+  </select>
+  <select id="selectAccountDetailByUid" parameterType="int" resultType="AccountDetailVo">
+    select * from accountDetail
+    where uid = #{uid}
+  </select>
+  <select id="selectAcocuntDetailListByAccountUid" parameterType="int" resultType="AccountDetailVo">
+    select * from accountDetail
+    where accountUid = #{accountUid}
+  </select>
+  <insert id="insertAccountDetail" parameterType="AccountDetailVo">
+    <selectKey keyProperty="uid" resultType="int" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into accountDetail(accountUid, type, amount)
+    values(#{accountUid}, #{type}, #{amount})
+  </insert>
+  <insert id="insertAccount" parameterType="AccountVo">
+    <selectKey keyProperty="uid" resultType="int" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into account(userUid, accountNumber, amount)
+    values(#{userUid}, #{accountNumber}, #{amount})
+  </insert>
+  <select id="selectAccountCountByUserUid" parameterType="int" resultType="int">
+    select count(*) from account 
+    where userUid = #{userUid}
+  </select>
+  <select id="selectAccountVoByAccountNumber" parameterType="string" resultType="AccountVo">
+    select * from account where accountNumber = #{accountNumber}
+  </select>
+  <update id="updateAccount" parameterType="AccountVo">
+    update account
+    set accountNumber = #{accountNumber}, 
+      amount = #{amount}
+    where uid = #{uid}
+  </update>
+</mapper>

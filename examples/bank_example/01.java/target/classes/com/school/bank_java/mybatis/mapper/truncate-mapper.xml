@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="truncate">
+  <delete id="truncate_user" >
+    delete from user
+  </delete>
+  <delete id="truncate_account" >
+    delete from account
+  </delete>
+  
+  <insert id="insert_user" parameterType="com.school.bank_java.vo.userVo">
+    <selectKey keyProperty="uid" resultType="int" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO user(userid, username)
+    VALUES(#{userid}, #{username})    
+  </insert>
+  
+  <insert id="insert_account" parameterType="list">
+    INSERT INTO account(user_uid, account_number, amount)
+    VALUES
+    <foreach collection="list" item="accountVo" open="(" close=")" separator=") ,(" >
+      #{accountVo.user_uid}, #{accountVo.account_number}, #{accountVo.amount}
+    </foreach>
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>
