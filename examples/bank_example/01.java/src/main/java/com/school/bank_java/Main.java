@@ -20,7 +20,7 @@ public class Main {
 	public static void main(String[] args) {
 		logger.debug(">>>test");
 		
-		SqlSession session = SqlSessionMaker.getSession(true);
+		SqlSession session = SqlSessionMaker.getSession(false);
 		LoginService loginService = new LoginService(new UserDao(session), session);
 		AccountService accountService = new AccountService(new AccountDao(session), session);
 		
