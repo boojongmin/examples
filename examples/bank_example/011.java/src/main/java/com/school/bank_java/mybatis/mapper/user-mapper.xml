@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.bank_java.mybatis.mapper">
+  <select id="selectUserVoByUserid" parameterType="string" resultType="com.school.bank_java.vo.UserVo">
+    SELECT * FROM user
+    WHERE userid = #{userid}
+  </select>
+  <insert id="insertUser" parameterType="UserVo">
+    insert into user(userId, userName)
+    values(#{userId}, #{userName})
+  </insert>
+</mapper>

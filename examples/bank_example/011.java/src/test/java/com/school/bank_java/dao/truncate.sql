@@ -1,0 +1,3 @@
+--truncate table "test".accountDetail;
+--truncate table "test".account;
+--truncate table "test".user;

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+    <package name="com.school.bank_java.vo"/>
+  </typeAliases>
+  
+  <typeHandlers> 
+    <typeHandler javaType="com.school.bank_java.code.AccountDetailType" handler="com.school.bank_java.mybatis.typehandler.AccountDetailTypehandler" /> 
+  </typeHandlers>
+
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:test;MODE=MYSQL;DB_CLOSE_DELAY=-1"/>
+        <property name="username" value="sa"/>
+        <property name="password" value="1234"/>
+      </dataSource>
+      
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="com/school/bank_java/mybatis/mapper/user-mapper.xml"/>
+    <mapper resource="com/school/bank_java/mybatis/mapper/account-mapper.xml"/>
+    <!--<mapper resource="com/school/bank_java/mybatis/mapper/truncate-mapper.xml"/> -->
+  </mappers>
+</configuration>
