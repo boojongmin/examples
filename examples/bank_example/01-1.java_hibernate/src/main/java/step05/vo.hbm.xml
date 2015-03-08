@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="step05.SchoolVo" table="SCHOOL">
+    <id name="uid" type="long" column="UID"><generator class="native"/></id>
+    <property name="name" column="NAME" type="string" length="20" />
+    <set name="studentList" table="STUDENT" cascade="all">
+      <key>
+        <column name="SCHOOL_UID" not-null="true" />
+      </key>
+      <one-to-many class="step05.StudentVo"/>
+    </set>
+  </class>
+  <class name="step05.StudentVo" table="STUDENT">
+    <meta attribute="class-description">this class student info</meta>
+    <id name="uid" type="long" column="UID">
+      <generator class="native" />
+    </id>
+    <property name="userid" column="USERID" type="string" unique="true" />
+    <property name="name" column="NAME" type="string" />
+    <one-to-one name="phoneNumberVo" class="step05.PhoneNumberVo" cascade="all"/>
+    <many-to-one name="schoolVo" class="step05.SchoolVo">
+      <column name="SCHOOL_UID" not-null="true" />
+    </many-to-one>
+  </class>
+  
+  <class name="step05.PhoneNumberVo" table="PHONENUMBER">
+    <id name="uid" type="long" column="UID">
+      <generator class="native" />
+    </id>
+    <property name="phoneNumber" column="PHONENUMBER"/>
+    <one-to-one name="studentVo" constrained="true" />
+  </class>
+</hibernate-mapping> 
+
+
+<!-- 
+create table STUDENT(
+  UID int primary key auto_increment,
+  NAME varchar(20) not null
+)
+
+-->
