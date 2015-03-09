@@ -23,22 +23,22 @@ import com.school.bank_java.vo.UserVo;
 
 public class CommonServiceTest {
 	private static final Logger commonLogger = LoggerFactory.getLogger(CommonServiceTest.class);
-	
+
 	private static final String JDBC_DRIVER = org.h2.Driver.class.getName();
 	private static final String JDBC_URL = "jdbc:h2:mem:test;MODE=MYSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false";
 	private static final String USER = "sa";
 	private static final String PASSWORD = "1234";
-	private static final String SCHEMA = "classpath:com/school/bank_java/dao/schema.sql";
-	private static final String TRUNCATE = "classpath:com/school/bank_java/dao/truncate.sql";
-	private static final String DATASET = "dataset.xml";
-	public static final String MYBATIS_CONFIG = "com/school/bank_java/dao/mybatis-test-config.xml";
-	
-	
+	private static final String SCHEMA = "classpath:com/school/bank_java/config/schema.sql";
+	private static final String TRUNCATE = "classpath:com/school/bank_java/config/truncate.sql";
+	private static final String DATASET = "com/school/bank_java/config/dataset.xml";
+	public static final String MYBATIS_CONFIG = "com/school/bank_java/config/mybatis-test-config.xml";
+
+
 //	@BeforeClass
 //    public static void createSchema() throws SQLException {
 //         RunScript.execute(JDBC_URL, USER, PASSWORD, SCHEMA, Charset.forName("UTF-8"), false);
-//    }	
-	
+//    }
+
 	@Before
 	public void importDataSet() throws Exception {
         RunScript.execute(JDBC_URL, USER, PASSWORD, SCHEMA, Charset.forName("UTF-8"), false);
@@ -48,7 +48,7 @@ public class CommonServiceTest {
 	}
 
 	public IDataSet readDataSet() throws Exception {
-		InputStream dataSource = getClass().getResourceAsStream(DATASET);
+		InputStream dataSource = this.getClass().getClassLoader().getResourceAsStream(DATASET);
 		return new FlatXmlDataSetBuilder().build(dataSource);
 	}
 
@@ -58,7 +58,7 @@ public class CommonServiceTest {
 		databaseTester.setDataSet(dataSet);
 		databaseTester.onSetup();
 	}
-	
+
 //	@Test
 //	public void findsAndReadsExistingPersonByFirstName() throws Exception {
 //		PersonRepository repository = new PersonRepository(dataSource());

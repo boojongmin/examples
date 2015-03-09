@@ -7,7 +7,7 @@ import com.school.bank_java.service.UserService;
 import com.school.bank_java.vo.UserVo;
 
 public class LoginCommand implements Command<UserService>{
-	
+
 	@Override
 	public void run(UserService service) {
 		System.out.println("커맨트를 입력해주세요");
@@ -15,7 +15,7 @@ public class LoginCommand implements Command<UserService>{
 		 *    ===============================
 		 *     1: 로그인(아이디 입력)
 		 *     2: 종료
-		 *    =============================== 
+		 *    ===============================
 		 */
 		StringBuffer sb = new StringBuffer();
 		sb.append("===============================     \n");
@@ -23,15 +23,16 @@ public class LoginCommand implements Command<UserService>{
 		sb.append("   'quit' =  종료                    \n");
 		sb.append("===============================     \n");
 		System.out.println(sb.toString());
-		
+
 		Scanner sc = new Scanner(System.in);
 		if(sc.hasNextLine()){
 			String command = sc.nextLine();
-			
+
 			switch(command){
-				case "quit": 
+				case "quit":
 					System.out.println("프로그램을 종료합니다.");
-					return;
+					System.exit(0);
+					break;
 				default:
 					UserVo vo = service.doLogin(command);
 					if(vo == null){
@@ -43,7 +44,7 @@ public class LoginCommand implements Command<UserService>{
 					break;
 			}
 		}
-		
-		
+
+
 	}
 }

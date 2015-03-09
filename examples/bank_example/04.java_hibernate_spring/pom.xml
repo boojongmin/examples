@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.school</groupId>
-  <artifactId>java_hibernate_spring</artifactId>
+  <artifactId>java_hibernate_springxml</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -13,7 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -26,25 +26,25 @@
 		  <artifactId>mybatis</artifactId>
 		  <version>3.2.8</version>
 		</dependency>
-		
+
 		<dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.34</version>
     </dependency>
-    
+
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
     </dependency>
-    
+
 	 <dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>spring-core</artifactId>
 	  <version>4.1.5.RELEASE</version>
 	</dependency>
-	
+
 	<!-- spring 4.15 -->
 	<dependency>
 	  <groupId>org.springframework</groupId>
@@ -71,41 +71,45 @@
     <artifactId>spring-aspects</artifactId>
     <version>4.1.5.RELEASE</version>
   </dependency>
-	
+  <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-test</artifactId>
+    <version>4.1.5.RELEASE</version>
+  </dependency>
   <!-- spring 4.15 -->
 
-    
-    
+
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.7.10</version>
     </dependency>
-    
+
 <!--     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>1.7.10</version>
     </dependency> -->
-    
+
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <version>1.4.185</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.10</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.dbunit</groupId>
       <artifactId>dbunit</artifactId>
       <version>2.5.0</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
@@ -116,8 +120,8 @@
       <artifactId>mybatis-spring</artifactId>
       <version>1.2.2</version>
   </dependency>
-  
-    
+
+
   </dependencies>
   <build>
   	<plugins>
@@ -134,9 +138,9 @@
        </plugin>
   	</plugins>
   </build>
-  
-  
-  
-  
-  
+
+
+
+
+
 </project>

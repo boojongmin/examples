@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-  <user userId="boojongmin" userName="부종민"/>
-  
-  <account userUid="1" accountNumber="0000100001" amount="1000"/>
-  <accountDetail accountUid="1" type="0" amount="10000"/>
-  <accountDetail accountUid="1" type="1" amount="-9000"/> 
-  
-</dataset>

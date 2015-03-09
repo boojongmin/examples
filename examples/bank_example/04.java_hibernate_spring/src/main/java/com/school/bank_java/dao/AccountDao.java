@@ -2,62 +2,31 @@ package com.school.bank_java.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-
 import com.school.bank_java.vo.AccountDetailVo;
 import com.school.bank_java.vo.AccountVo;
 
-public class AccountDao {
-	private String id_prefix = "com.school.bank_java.mybatis.mapper.";
-	private SqlSession session;
-	
-	public AccountDao(SqlSession session){
-		this.session = session;
-	}
+public interface AccountDao {
 
-//	public List<String> selectAccount_numbers(int user_uid) {
-//		return session.selectList(id_prefix + "selectAccount_numbers", user_uid);
-//	}
+	public abstract AccountVo selectAccountVoByUid(int uid);
 
-	public AccountVo selectAccountVoByUid(int uid) {
-		return (AccountVo)session.selectOne(id_prefix + "selectAccountVoByUid", uid);
-	}
+	public abstract List<AccountDetailVo> selectAcocuntDetailByUid(int uid);
 
-	public List<AccountDetailVo> selectAcocuntDetailByUid(int uid) {
-		return session.selectList(id_prefix + "selectAcocuntDetailByUid", uid); 
-	}
+	public abstract int insertAccountDetail(AccountDetailVo vo);
 
-	public int insertAccountDetail(AccountDetailVo vo) {
-		return session.insert(id_prefix+ "insertAccountDetail", vo);
-	}
+	public abstract AccountDetailVo selectAccountDetailByUid(int uid);
 
-	public AccountDetailVo selectAccountDetailByUid(int uid) {
-		return session.selectOne(id_prefix + "selectAccountDetailByUid", uid);
-	}
+	public abstract List<AccountDetailVo> selectAcocuntDetailListByAccountUid(
+			int accountUid);
 
-	public List<AccountDetailVo> selectAcocuntDetailListByAccountUid(int accountUid) {
-		return session.selectList(id_prefix + "selectAcocuntDetailListByAccountUid", accountUid);
-	}
+	public abstract int insertAccount(AccountVo vo);
 
-	public int insertAccount(AccountVo vo) {
-		return session.insert(id_prefix+ "insertAccount", vo);
-	}
+	public abstract int selectAccountCountByUserUid(int useruid);
 
-	public int selectAccountCountByUserUid(int useruid) {
-		return session.selectOne(id_prefix+"selectAccountCountByUserUid", useruid);
-	}
+	public abstract List<AccountVo> selectAccountList(int user_uid);
 
-	public List<AccountVo> selectAccountList(int user_uid) {
-		return session.selectList(id_prefix + "selectAccountList", user_uid);
-	}
+	public abstract int updateAccount(AccountVo accountVo);
 
-	public int updateAccount(AccountVo accountVo) {
-		return session.update(id_prefix + "updateAccount", accountVo);
-	}
-
-	public AccountVo selectAccountVoByAccountNumber(String accountNumber) {
-		return session.selectOne(id_prefix + "selectAccountVoByAccountNumber", accountNumber); 
-	}
-
+	public abstract AccountVo selectAccountVoByAccountNumber(
+			String accountNumber);
 
 }
