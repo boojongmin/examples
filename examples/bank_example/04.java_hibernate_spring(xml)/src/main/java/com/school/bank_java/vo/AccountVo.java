@@ -1,35 +1,66 @@
 package com.school.bank_java.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Transient;
 
 import org.apache.ibatis.type.Alias;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Alias("AccountVo")
+@Entity
 public class AccountVo {
-	
+
 	public AccountVo() { }
-	
 	public AccountVo(int userUid, String accountNumber, int amount) {
 		this.userUid = userUid;
 		this.accountNumber = accountNumber;
-		this.amount = amount;	  
+		this.amount = amount;
 	}
-	
-	public AccountVo(int uid, int userUid, String accountNumber, int amount) {
-		this.uid = uid;
-		this.userUid = userUid;
+    public AccountVo(UserVo userVo, String accountNumber, int amount, Date createDt) {
+		this.userVo = userVo;
 		this.accountNumber = accountNumber;
-		this.amount = amount;	  
+		this.amount = amount;
+		this.createDt = createDt;
 	}
-	
+	public AccountVo(int uid, int userUid, String accountNumber, int amount) {
+        this(userUid, accountNumber, amount);
+        this.uid = uid;
+
+	}
+
 	private int uid;
+	//mybatis에서만 쓰임
 	private int userUid;
 	private String accountNumber;
 	private int amount;
 	private Date createDt;
-	
-	
 
+	//하이버네이트 추가
+	private UserVo userVo;
+
+	private List<AccountDetailVo> accountDetailList = new ArrayList<AccountDetailVo>();
+
+
+
+
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getUid() {
 		return uid;
 	}
@@ -38,6 +69,7 @@ public class AccountVo {
 		this.uid = uid;
 	}
 
+	@Transient
 	public int getUserUid() {
 		return userUid;
 	}
@@ -70,13 +102,35 @@ public class AccountVo {
 		this.createDt = createDt;
 	}
 
+//	@ManyToOne(fetch= FetchType.EAGER)
+	@ManyToOne(fetch= FetchType.LAZY)
+	@JoinColumn( name="userUid")
+//	@Column
+	public UserVo getUserVo() {
+		return userVo;
+	}
+
+	public void setUserVo(UserVo userVo) {
+		this.userVo = userVo;
+	}
+
+
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy="accountVo")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="accountVo", cascade = CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@OrderBy("uid ASC")
+	public List<AccountDetailVo> getAccountDetailList() {
+		return accountDetailList;
+	}
+	public void setAccountDetailList(List<AccountDetailVo> accountDetailList) {
+		this.accountDetailList = accountDetailList;
+	}
 	@Override
 	public boolean equals(Object other) {
 		 boolean result = false;
 		    if (other instanceof AccountVo) {
 		        AccountVo that = (AccountVo) other;
-		        result = (this.getUserUid() == that.getUserUid() 
-		        			&& this.getAccountNumber().equals(that.getAccountNumber())
+		        result = (this.getAccountNumber().equals(that.getAccountNumber())
 		        			&&  this.getAmount() == that.getAmount()
 		        		);
 		    }

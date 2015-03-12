@@ -1,8 +1,9 @@
-package com.school.bank_java.spring.dao;
+package com.school.bank_java.spring.dao.hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -11,22 +12,32 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.school.bank_java.code.AccountDetailType;
 import com.school.bank_java.dao.AccountDao;
-import com.school.bank_java.spring.config.DBInit;
+import com.school.bank_java.spring.config.HibernateDataInit;
+import com.school.bank_java.spring.config.MybatisDBInit;
 import com.school.bank_java.vo.AccountDetailVo;
 import com.school.bank_java.vo.AccountVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:com/school/bank_java/spring/config/test-application-context.xml"})
+@ContextConfiguration(locations={"classpath*:/com/school/bank_java/config/application-*.xml"})
+@ActiveProfiles(profiles = {"test" ,  "hibernate"})
+@Transactional
+@TransactionConfiguration(defaultRollback=true)
 public class AccountDaoTest{
 	final Logger logger = LoggerFactory.getLogger(UserDaoTest.class);
 
 	@Autowired
-	public  AccountDao dao;
+	AccountDao dao;
+	@Autowired
+	SessionFactory factory;
 
 	private static final int UID = 1;
 	private static final int USERUID = 1;
@@ -36,24 +47,22 @@ public class AccountDaoTest{
 	private static final List<AccountVo> ACCOUNTLlIST = new ArrayList<AccountVo>();
 	private static final List<AccountDetailVo> ACCOUNTDETAILlIST = new ArrayList<AccountDetailVo>();
 
+	@Before
+	public void beforeSetup(){
+		HibernateDataInit.run(factory);
+	}
+
 	@BeforeClass
 	public static void setupData(){
-
 		ACCOUNTLlIST.add(ACCOUNTVO);
 		ACCOUNTDETAILlIST.add(new AccountDetailVo(ACCOUNTUID, AccountDetailType.SAVE, 10000));
 		ACCOUNTDETAILlIST.add(new AccountDetailVo(ACCOUNTUID, AccountDetailType.WITHDRAW, -9000));
 	}
 
-	@Before
-	public void beforeSetup(){
-		DBInit.run();
-	}
-
-
 	@Test
 	public void test_01_view_my_account_by_uid() throws Exception {
 		List<AccountVo> list = dao.selectAccountList(UID);
-		Assert.assertTrue(list.size() == 1);
+		Assert.assertEquals(1, list.size());
 		Assert.assertEquals(ACCOUNTVO.getAccountNumber(), list.get(0).getAccountNumber());
 	}
 
@@ -86,7 +95,7 @@ public class AccountDaoTest{
 	}
 
 	@Test
-	public void test_06_seleectAccountCount() throws Exception {
+	public void test_06_selectAccountCount() throws Exception {
 		int accountCount = dao.selectAccountCountByUserUid(USERUID);
 		Assert.assertEquals(ACCOUNTLlIST.size(), accountCount);
 	}

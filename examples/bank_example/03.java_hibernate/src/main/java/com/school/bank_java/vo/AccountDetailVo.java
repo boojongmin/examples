@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.apache.ibatis.type.Alias;
 
@@ -18,7 +19,7 @@ import com.school.bank_java.code.AccountDetailType;
 @Entity
 public class AccountDetailVo {
 	private int uid;
-	//mybatis에서만 쓰임
+	//mybatis에서만 쓰임//@Transient getter에만 적용됨 feild는 인식 안함
 	private int accountUid;
 	private AccountDetailType type;
 	private int amount;
@@ -49,6 +50,7 @@ public class AccountDetailVo {
 		this.uid = uid;
 	}
 
+	@Transient
 	public int getAccountUid() {
 		return accountUid;
 	}

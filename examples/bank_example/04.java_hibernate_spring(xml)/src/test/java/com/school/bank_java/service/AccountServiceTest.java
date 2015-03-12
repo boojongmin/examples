@@ -1,21 +1,17 @@
 package com.school.bank_java.service;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
 
 import org.apache.ibatis.session.SqlSession;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.school.bank_java.code.AccountDetailType;
 import com.school.bank_java.dao.AccountDao;
 import com.school.bank_java.dao.UserDao;
 import com.school.bank_java.dao.UserDaoTest;
@@ -24,7 +20,6 @@ import com.school.bank_java.dao.mybatis.MybatisUserDao;
 import com.school.bank_java.exception.BankException;
 import com.school.bank_java.login.LoginManager;
 import com.school.bank_java.mybatis.SqlSessionMaker;
-import com.school.bank_java.vo.AccountDetailVo;
 import com.school.bank_java.vo.AccountVo;
 import com.school.bank_java.vo.UserVo;
 
@@ -48,7 +43,7 @@ public class AccountServiceTest extends CommonServiceTest{
 	@BeforeClass
 	public static void setupData(){
 		ACCOUNTLlIST.add("0000100001");
-		LoginManager.loginMap.put("UserVo", new UserVo(USERUID, "boojongmin", "부종민"));
+		LoginManager.loginMap.put("UserVo", new UserVo(USERUID, "boojongmin", "부종민", new Date()));
 	}
 
 	@Test

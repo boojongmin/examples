@@ -13,9 +13,6 @@ public class UserService {
 
 
 	public UserVo doLogin(String userid){
-
-		if(true)throw new RuntimeException("test");
-
 		return dao.selectUserVoByUserid(userid);
 	}
 

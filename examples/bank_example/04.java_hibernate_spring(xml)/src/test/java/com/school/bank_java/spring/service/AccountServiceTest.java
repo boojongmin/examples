@@ -1,6 +1,7 @@
 package com.school.bank_java.spring.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -12,8 +13,12 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.school.bank_java.dao.AccountDao;
 import com.school.bank_java.dao.UserDao;
@@ -21,14 +26,20 @@ import com.school.bank_java.dao.UserDaoTest;
 import com.school.bank_java.exception.BankException;
 import com.school.bank_java.login.LoginManager;
 import com.school.bank_java.service.AccountService;
-import com.school.bank_java.spring.config.DBInit;
+import com.school.bank_java.spring.config.MybatisDBInit;
 import com.school.bank_java.vo.AccountVo;
 import com.school.bank_java.vo.UserVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:com/school/bank_java/spring/config/test-application-context.xml"})
+@ContextConfiguration(locations={"classpath*:/com/school/bank_java/config/application-*.xml"})
+@ActiveProfiles(profiles = {"test" ,  "hibernate"})
+@Transactional
+@TransactionConfiguration(defaultRollback=true)
 public class AccountServiceTest{
 	final Logger logger = LoggerFactory.getLogger(UserDaoTest.class);
+
+	@Autowired
+	ApplicationContext ctx;
 
 	@Autowired
 	public UserDao userdao;
@@ -49,13 +60,14 @@ public class AccountServiceTest{
 	@BeforeClass
 	public static void setupData(){
 		ACCOUNTLlIST.add("0000100001");
-		LoginManager.loginMap.put("UserVo", new UserVo(USERUID, "boojongmin", "부종민"));
+		LoginManager.loginMap.put("UserVo", new UserVo(USERUID, "boojongmin", "부종민", new Date()));
+		MybatisDBInit.run();
 	}
 
-	@Before
-	public void beforeSetup(){
-		DBInit.run();
-	}
+//	@Before
+//	public void beforeSetup(){
+//		DBInit.run();
+//	}
 
 	@Test
 	public void test_01_viewMyAccount() throws Exception {
@@ -81,9 +93,10 @@ public class AccountServiceTest{
 		boolean depositFalse = service.deposit(user_uid, "fail AccountNumber", 10000);
 		Assert.assertFalse(depositFalse);
 	}
+	@Test
 	public void test_05_withdrawal_success() throws Exception {
 		int user_uid = LoginManager.loginMap.get("UserVo").getUid();
-		boolean depositTrue = service.withdrawal(user_uid, ACCOUNTVO.getAccountNumber(), 10000);
+		boolean depositTrue = service.withdrawal(user_uid, ACCOUNTVO.getAccountNumber(), 1000);
 		Assert.assertTrue(depositTrue);
 	}
 

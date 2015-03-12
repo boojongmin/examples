@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Transient;
 
 import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.Fetch;
@@ -65,6 +66,7 @@ public class AccountVo {
 		this.uid = uid;
 	}
 
+	@Transient
 	public int getUserUid() {
 		return userUid;
 	}

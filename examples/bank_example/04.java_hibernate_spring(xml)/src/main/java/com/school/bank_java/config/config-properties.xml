@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>환경 설정 production</comment>
+  <entry key="production.jdbc.driverClassName"></entry>
+  <entry key="production.jdbc.url"></entry>
+  <entry key="production.jdbc.username"></entry>
+
+
+  <!-- 공통 -->
+  <entry key="hibernate.dialect">org.hibernate.dialect.H2Dialect</entry>
+
+
+
+  <!-- <comment>환경 설정 test</comment> -->
+  <entry key="test.jdbc.driverClassName">org.h2.Driver</entry>
+  <entry key="test.jdbc.url">jdbc:h2:tcp://localhost/~/test;AUTO_SERVER=TRUE;DATABASE_TO_UPPER=false</entry>
+  <entry key="test.jdbc.username">sa</entry>
+  <entry key="test.jdbc.password">1234</entry>
+</properties>
