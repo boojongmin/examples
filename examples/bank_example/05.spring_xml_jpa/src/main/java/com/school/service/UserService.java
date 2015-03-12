@@ -3,8 +3,8 @@ package com.school.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
+import com.school.domain.User;
 import com.school.repository.UserRepository;
-import com.school.vo.User;
 
 public class UserService {
 

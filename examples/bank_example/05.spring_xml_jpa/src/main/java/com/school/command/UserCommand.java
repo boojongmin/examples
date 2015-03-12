@@ -2,9 +2,9 @@ package com.school.command;
 
 import java.util.Scanner;
 
+import com.school.domain.User;
 import com.school.login.LoginManager;
 import com.school.service.UserService;
-import com.school.vo.User;
 
 public class UserCommand implements Command<UserService>{
 

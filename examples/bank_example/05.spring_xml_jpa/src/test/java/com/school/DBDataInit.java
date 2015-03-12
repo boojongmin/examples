@@ -8,7 +8,7 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
-import com.school.vo.User;
+import com.school.domain.User;
 
 public class DBDataInit {
 	public static void main( String[] args){

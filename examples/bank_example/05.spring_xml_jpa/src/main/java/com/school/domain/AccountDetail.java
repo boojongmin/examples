@@ -1,4 +1,4 @@
-package com.school.vo;
+package com.school.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

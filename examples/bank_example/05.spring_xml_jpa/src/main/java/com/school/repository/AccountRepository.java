@@ -4,8 +4,8 @@ import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.school.vo.Account;
-import com.school.vo.User;
+import com.school.domain.Account;
+import com.school.domain.User;
 
 public interface AccountRepository extends CrudRepository<Account, Long> {
 	Account findByAccountNumber(String accountNumber);

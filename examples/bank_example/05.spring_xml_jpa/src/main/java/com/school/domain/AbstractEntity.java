@@ -1,4 +1,4 @@
-package com.school.vo;
+package com.school.domain;
 
 import java.util.Date;
 

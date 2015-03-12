@@ -6,10 +6,10 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.school.domain.Account;
+import com.school.domain.User;
 import com.school.login.LoginManager;
 import com.school.service.AccountService;
-import com.school.vo.Account;
-import com.school.vo.User;
 
 public class AccountCommand implements Command<AccountService> {
     Logger logger = LoggerFactory.getLogger(AccountCommand.class);

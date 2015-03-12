@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.school.vo.AccountDetail;
+import com.school.domain.AccountDetail;
 
 public interface AccountDetailRepository extends CrudRepository<AccountDetail, Long> {
 	 @Modifying

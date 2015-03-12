@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.school.AbstractIntegrationTest;
 import com.school.DBData;
-import com.school.vo.User;
+import com.school.domain.User;
 
 public class UserServiceTest  extends AbstractIntegrationTest{
 	@Autowired

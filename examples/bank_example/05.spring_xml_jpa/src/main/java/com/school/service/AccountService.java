@@ -5,14 +5,14 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.school.domain.Account;
+import com.school.domain.AccountDetail;
+import com.school.domain.User;
 import com.school.exception.BankException;
 import com.school.repository.AccountDetailRepository;
 import com.school.repository.AccountRepository;
 import com.school.repository.UserRepository;
 import com.school.type.AccountDetailType;
-import com.school.vo.Account;
-import com.school.vo.AccountDetail;
-import com.school.vo.User;
 
 @Transactional(readOnly=true)
 public class AccountService {

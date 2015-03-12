@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.school.AbstractIntegrationTest;
 import com.school.DBData;
+import com.school.domain.Account;
+import com.school.domain.User;
 import com.school.exception.BankException;
 import com.school.repository.AccountRepository;
 import com.school.repository.UserRepository;
-import com.school.vo.Account;
-import com.school.vo.User;
 
 public class AccountServiceTest  extends AbstractIntegrationTest{
 	@Autowired
