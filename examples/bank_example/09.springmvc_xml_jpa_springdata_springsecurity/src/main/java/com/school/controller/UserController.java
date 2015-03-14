@@ -40,12 +40,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
-	public void logout(HttpSession session) {
-		CustomUserDetails userDetails = (CustomUserDetails) session .getAttribute("userLoginInfo");
-
-		logger.info("Welcome logout! {}, {}", session.getId(), userDetails.getUsername());
-
+	public String logout(HttpSession session) {
 		session.invalidate();
+		return "login";
 	}
 
 	@RequestMapping(value = "loginSuccess", method = RequestMethod.GET)

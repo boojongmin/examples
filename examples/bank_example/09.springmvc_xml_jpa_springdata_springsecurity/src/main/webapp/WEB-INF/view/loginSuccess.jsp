@@ -9,5 +9,6 @@
 <body>
 <h2>로그인 성공</h2>
 환영합니다. ${sessionScope.User.name }님
+<a href="logout">[logout]</a>
 </body>
 </html>
